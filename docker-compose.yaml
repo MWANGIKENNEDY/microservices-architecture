@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    ports:
+      - "4001:4001"
+    env_file:
+      - ./user-service/.env
+
+  order-service:
+    build: ./order-service
+    container_name: order-service
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./order-service/.env
+    depends_on:
+      - user-service
